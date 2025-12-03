@@ -1,0 +1,18 @@
+html
+  head
+    link(rel="stylesheet", href="/style.css")
+  body
+    .container
+      .box
+        h1.post-title 글쓰기 🌸
+
+        form(action="/board/write", method="post")
+          label 제목
+          input(type="text", name="title", required)
+
+          label 내용
+          textarea(name="content", required)
+
+          button(type="submit") 작성하기
+
+        a.btn-back(href="/board") ← 목록으로 돌아가기

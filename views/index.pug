@@ -1,0 +1,42 @@
+html
+  head
+    link(rel="stylesheet", href="/style.css")
+  body
+    .container
+      .board-title 🌸 게시판 🌸
+
+      a.btn-write(href="/board/write") 글쓰기
+
+      .box
+        table
+          thead
+            tr
+              th 번호
+              th 제목
+              th 작성일
+          tbody
+            if boards && boards.length > 0
+              each item in boards
+                tr
+                  td #{item.id}
+                  td 
+                    a.title-link(href=`/board/${item.id}`) #{item.title}
+                  td #{item.createdAt.toLocaleString()}
+            else
+              tr
+                td(colspan="3") 게시글이 없습니다 🌸
+
+
+      // 🔥 페이지네이션 섹션
+      .pagination
+        if page > 1
+          a.page-btn(href=`/board?page=${page - 1}`) ◀ 이전
+
+        each num in [...Array(lastPage).keys()].map(x => x + 1)
+          if num === page
+            span.page-current #{num}
+          else
+            a.page-btn(href=`/board?page=${num}`) #{num}
+
+        if page < lastPage
+          a.page-btn(href=`/board?page=${page + 1}`) 다음 ▶
