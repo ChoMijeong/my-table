@@ -1,11 +1,15 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="ko">
   <head>
+    <meta charset="UTF-8" />
+    <title>🌸 게시판 🌸</title>
     <link rel="stylesheet" href="style.css"/>
   </head>
   <body>
     <div class="container">
-      <div class="board-title">🌸 게시판 🌸</div><a class="btn-write" href="write.html">글쓰기</a>
+      <div class="board-title">🌸 게시판 🌸</div>
+      <a class="btn-write" href="write.html">글쓰기</a>
+
       <div class="box">
         <table>
           <thead>
@@ -15,16 +19,73 @@
               <th>작성일</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td colspan="3">게시글이 없습니다 🌸</td>
-            </tr>
+          <tbody id="post-body">
+            <!-- JS로 채워짐 -->
           </tbody>
         </table>
       </div>
+
       <!-- 🔥 페이지네이션 섹션-->
-      <div class="pagination"><a class="page-btn" href="page=1">1</a>
+      <div class="pagination">
+        <a class="page-btn" href="index.html?page=1">1</a>
       </div>
     </div>
+
+    <script>
+      const STORAGE_KEY = 'myTablePosts';
+
+      function loadPosts() {
+        try {
+          return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        } catch (e) {
+          console.error(e);
+          return [];
+        }
+      }
+
+      function formatDate(iso) {
+        if (!iso) return '';
+        const d = new Date(iso);
+        const yyyy = d.getFullYear();
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const dd = String(d.getDate()).padStart(2, '0');
+        return `${yyyy}-${mm}-${dd}`;
+      }
+
+      function renderList() {
+        const tbody = document.getElementById('post-body');
+        const posts = loadPosts().sort((a, b) => b.id - a.id); // 최신글 위로
+
+        tbody.innerHTML = '';
+
+        if (posts.length === 0) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td colspan="3">게시글이 없습니다 🌸</td>`;
+          tbody.appendChild(tr);
+          return;
+        }
+
+        posts.forEach((post, idx) => {
+          const tr = document.createElement('tr');
+
+          // 번호: 최신 글이 1번처럼 보이게
+          const no = posts.length - idx;
+
+          tr.innerHTML = `
+            <td>${no}</td>
+            <td>
+              <a href="detail.html?id=${post.id}">
+                ${post.title}
+              </a>
+            </td>
+            <td>${formatDate(post.createdAt)}</td>
+          `;
+
+          tbody.appendChild(tr);
+        });
+      }
+
+      renderList();
+    </script>
   </body>
 </html>

@@ -1,13 +1,63 @@
-
-<html>
-  <head>
-    <link rel="stylesheet" href="style.css"/>
-  </head>
-  <body>
-    <div class="container">
-      <div class="box">
-        <h1>게시글을 찾을 수 없습니다.</h1><a class="btn-back" href="/board">목록으로</a>
-      </div>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>게시글 상세</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="box" id="detail-box">
+      <!-- JS로 내용 채움 -->
     </div>
-  </body>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'myTablePosts';
+
+    // localStorage에서 전체 글 불러오기
+    function loadPosts() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      } catch (e) {
+        console.error(e);
+        return [];
+      }
+    }
+
+    // ?id=123 이런 식으로 URL에서 id 가져오기
+    function getQueryId() {
+      const params = new URLSearchParams(location.search);
+      return Number(params.get('id'));
+    }
+
+    const id = getQueryId();
+    const posts = loadPosts();
+    const post = posts.find(p => p.id === id);
+    const box = document.getElementById('detail-box');
+
+    if (!post) {
+      // 게시글이 없는 경우 (너가 준 HTML)
+      box.innerHTML = `
+        <h1>게시글을 찾을 수 없습니다.</h1>
+        <a class="btn-back" href="index.html">목록으로</a>
+      `;
+    } else {
+      // 게시글이 존재하는 경우
+      box.innerHTML = `
+        <h1>${post.title}</h1>
+        <p style="margin-top:10px; white-space:pre-wrap;">${post.content}</p>
+
+        <div style="margin-top:20px; font-size:14px; color:#666;">
+          작성자: ${post.writer || '익명'}<br>
+          작성일: ${new Date(post.createdAt).toLocaleString()}
+        </div>
+
+        <a class="btn-back" href="index.html" style="margin-top:20px; display:inline-block;">
+          목록으로
+        </a>
+      `;
+    }
+  </script>
+</body>
 </html>
