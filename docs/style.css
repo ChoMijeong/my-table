@@ -1,0 +1,182 @@
+/* 기본 배경 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  background: #fff7fc; /* 연한 핑크 파스텔 */
+  color: #444;
+}
+
+/* 전체 컨테이너 */
+.container {
+  width: 800px;
+  margin: 40px auto;
+}
+
+/* 상단 제목 */
+.board-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ff91c1;
+  margin-bottom: 20px;
+  text-shadow: 0px 1px 2px rgba(255,140,180,0.3);
+}
+
+/* 아기자기 카드 박스 */
+.box {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(255,150,200,0.25);
+  border: 1px solid #ffe0ef;
+}
+
+/* 글쓰기 버튼 */
+.btn-write {
+  display: inline-block;
+  padding: 10px 15px;
+  background: #ffa6d1;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 15px;
+  transition: 0.15s;
+}
+.btn-write:hover {
+  background: #ff8ec3;
+}
+
+/* 게시판 테이블 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table thead {
+  background: #ffeaf4;
+}
+
+table th {
+  padding: 12px;
+  border-bottom: 2px solid #ffd0e6;
+  text-align: left;
+  font-size: 15px;
+  color: #ff7ab3;
+}
+
+table td {
+  padding: 12px;
+  border-bottom: 1px solid #ffe1ef;
+  font-size: 14px;
+}
+
+table tr:hover td {
+  background: #fff2f8;
+}
+
+/* 제목 링크 */
+a.title-link {
+  font-weight: 600;
+  color: #ff4f9c;
+  text-decoration: none;
+}
+a.title-link:hover {
+  color: #ff006f;
+}
+
+/* 상세 페이지 */
+.post-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #ff7ab3;
+}
+
+.post-info {
+  color: #999;
+  margin-bottom: 15px;
+}
+
+.post-content {
+  font-size: 16px;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+/* 뒤로가기 버튼 */
+.btn-back {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 10px 16px;
+  background: #ffe1ef;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #ff4f9c;
+}
+.btn-back:hover {
+  background: #ffcade;
+}
+
+/* 글쓰기 폼 */
+label {
+  font-weight: 600;
+  color: #ff7ab3;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #ffd4e8;
+  font-size: 15px;
+  background: #fff9fc;
+}
+
+textarea {
+  height: 200px;
+}
+
+button {
+  padding: 12px 18px;
+  background: #ff91c1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+button:hover {
+  background: #ff7eb6;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.page-btn {
+  display: inline-block;
+  padding: 8px 12px;
+  background: #ffd9ec;
+  color: #ff4f9c;
+  border-radius: 6px;
+  margin: 0 4px;
+  text-decoration: none;
+  font-size: 14px;
+}
+.page-btn:hover {
+  background: #ffcae5;
+}
+
+.page-current {
+  display: inline-block;
+  padding: 8px 12px;
+  background: #ff91c1;
+  color: white;
+  border-radius: 6px;
+  margin: 0 4px;
+  font-weight: 700;
+}
