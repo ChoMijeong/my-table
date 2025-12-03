@@ -1,80 +1,20 @@
-<!DOCTYPE html>
-<html lang="ko">
+
+<html>
   <head>
-    <meta charset="UTF-8">
-    <title>글쓰기 🌸</title>
     <link rel="stylesheet" href="style.css"/>
   </head>
   <body>
     <div class="container">
       <div class="box">
         <h1 class="post-title">글쓰기 🌸</h1>
-
-        <form id="write-form">
+        <form action="write" method="post">
           <label>제목</label>
-          <input type="text" id="title" required />
-
+          <input type="text" name="title" required="required"/>
           <label>내용</label>
-          <textarea id="content" required></textarea>
-
+          <textarea name="content" required="required"></textarea>
           <button type="submit">작성하기</button>
-        </form>
-
-        <a class="btn-back" href="index.html">← 목록으로 돌아가기</a>
+        </form><a class="btn-back" href="index.html">← 목록으로 돌아가기</a>
       </div>
     </div>
-
-    <script>
-      const STORAGE_KEY = 'myTablePosts';
-
-      // localStorage에서 글 불러오기
-      function loadPosts() {
-        try {
-          return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        } catch (e) {
-          console.error(e);
-          return [];
-        }
-      }
-
-      // localStorage 저장
-      function savePosts(posts) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
-      }
-
-      const form = document.getElementById('write-form');
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();  // 기본 동작(새로고침, 서버전송) 막기
-
-        const title = document.getElementById('title').value.trim();
-        const content = document.getElementById('content').value.trim();
-
-        if (!title || !content) {
-          alert("제목과 내용을 입력해주세요.");
-          return;
-        }
-
-        const posts = loadPosts();
-
-        // 고유 ID 생성
-        const newId = posts.length > 0 ? Math.max(...posts.map(p => p.id)) + 1 : 1;
-
-        // 글 객체 생성
-        const newPost = {
-          id: newId,
-          title,
-          content,
-          writer: "익명",
-          createdAt: new Date().toISOString()
-        };
-
-        posts.push(newPost);
-        savePosts(posts);
-
-        alert("작성 완료! 🌸");
-        location.href = "index.html";
-      });
-    </script>
   </body>
 </html>
